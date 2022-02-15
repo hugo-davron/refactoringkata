@@ -1,6 +1,6 @@
 import java.util.ArrayList;
 import java.util.LinkedList;
-
+//test
 public class Trivia {
 
     ArrayList players = new ArrayList();
