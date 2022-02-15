@@ -7,6 +7,8 @@ public class Trivia {
     int[] places = new int[6];
     int[] purses  = new int[6];
     boolean[] inPenaltyBox  = new boolean[6];
+	private static final String sports = "Sports";
+	private static final String science = "Science";
     
     LinkedList<String> popQuestions = new LinkedList<>();
     LinkedList<String> scienceQuestions = new LinkedList<>();
@@ -19,8 +21,8 @@ public class Trivia {
     public  Trivia(){
     	for (int i = 0; i < 50; i++) {
 			popQuestions.addLast("Pop Question " + i);
-			scienceQuestions.addLast(("Science Question " + i));
-			sportsQuestions.addLast(("Sports Question " + i));
+			scienceQuestions.addLast((science + "Question " + i));
+			sportsQuestions.addLast((sports + "Question " + i));
 			rockQuestions.addLast(createRockQuestion(i));
     	}
     }
@@ -86,9 +88,9 @@ public class Trivia {
 	private void askQuestion() {
 		if (currentCategory().equals("Pop"))
 			System.out.println(popQuestions.removeFirst());
-		if (currentCategory().equals("Science"))
+		if (currentCategory().equals(science))
 			System.out.println(scienceQuestions.removeFirst());
-		if (currentCategory().equals("Sports"))
+		if (currentCategory().equals(sports))
 			System.out.println(sportsQuestions.removeFirst());
 		if (currentCategory().equals("Rock"))
 			System.out.println(rockQuestions.removeFirst());		
@@ -96,15 +98,9 @@ public class Trivia {
 	
 	
 	private String currentCategory() {
-		if (places[currentPlayer] == 0) return "Pop";
-		if (places[currentPlayer] == 4) return "Pop";
-		if (places[currentPlayer] == 8) return "Pop";
-		if (places[currentPlayer] == 1) return "Science";
-		if (places[currentPlayer] == 5) return "Science";
-		if (places[currentPlayer] == 9) return "Science";
-		if (places[currentPlayer] == 2) return "Sports";
-		if (places[currentPlayer] == 6) return "Sports";
-		if (places[currentPlayer] == 10) return "Sports";
+		if (places[currentPlayer] == 0 || places[currentPlayer] == 4 || places[currentPlayer] == 8) return "Pop";
+		if (places[currentPlayer] == 1 || places[currentPlayer] == 5 || places[currentPlayer] == 9) return science;
+		if (places[currentPlayer] == 2 || places[currentPlayer] == 6 || places[currentPlayer] == 10) return sports;
 		return "Rock";
 	}
 
