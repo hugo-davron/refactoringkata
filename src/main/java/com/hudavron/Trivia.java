@@ -119,9 +119,6 @@ public class Trivia {
 				if (currentPlayer == players.size()) currentPlayer = 0;
 				return true;
 			}
-			
-			
-			
 		} else {
 		
 			LOGGER.log(Level.INFO, () ->"Answer was corrent!!!!");
