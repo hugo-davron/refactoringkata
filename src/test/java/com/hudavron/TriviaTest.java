@@ -42,10 +42,24 @@ public class TriviaTest extends TestCase {
         Assert.assertEquals(4, trivia.howManyPlayers());
     }
 
-    public void testRoll() {
-            /*Trivia trivia = new Trivia();
-            trivia*/
+    public void testRollInPenaltyBoxOdd() {
+        Trivia trivia = new Trivia();
+        trivia.add("Hugo");
+        trivia.add("Marie");
+        trivia.wrongAnswer();
+        trivia.currentPlayer = 0;
+        trivia.roll(1);
+        Assert.assertTrue(trivia.isGettingOutOfPenaltyBox);
+    }
 
+    public void testRollInPenaltyBoxEven() {
+        Trivia trivia = new Trivia();
+        trivia.add("Hugo");
+        trivia.add("Marie");
+        trivia.wrongAnswer();
+        trivia.currentPlayer = 0;
+        trivia.roll(2);
+        Assert.assertFalse(trivia.isGettingOutOfPenaltyBox);
     }
 
     public void testWasCorrectlyAnsweredGettingOutOfPenaltyBox0Coins() {
