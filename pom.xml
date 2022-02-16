@@ -21,12 +21,22 @@
         <sonar.language>java</sonar.language>
     </properties>
 
+
+
     <dependencies>
+
         <dependency>
-            <groupId>org.jacoco</groupId>
-            <artifactId>jacoco-maven-plugin</artifactId>
-            <version>0.8.7</version>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-site-plugin</artifactId>
+            <version>3.7.1</version>
         </dependency>
+
+        <dependency>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-project-info-reports-plugin</artifactId>
+            <version>3.1.1</version>
+        </dependency>
+
         <dependency>
             <groupId>com.google.guava</groupId>
             <artifactId>guava</artifactId>
@@ -38,12 +48,7 @@
             <artifactId>slf4j-api</artifactId>
             <version>1.7.16</version>
         </dependency>
-        <dependency>
-            <groupId>org.slf4j</groupId>
-            <artifactId>slf4j-simple</artifactId>
-            <version>1.7.16</version>
-        </dependency>
-        
+
         <!-- Test -->
         <dependency>
             <groupId>junit</groupId>
@@ -57,65 +62,42 @@
             <version>1.10.19</version>
             <scope>test</scope>
         </dependency>
-       
+
     </dependencies>
 
     <build>
+            <plugins>
 
-        <plugins>
-            
-            <!-- Unit Tests -->
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-surefire-plugin</artifactId>
-                <version>2.19.1</version>
-                <configuration>
-                    <includes>
-                        <include>**/*UnitTest</include>
-                        <include>**/*CompTest</include>
-                    </includes>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-compiler-plugin</artifactId>
+                    <version>3.3</version>
+                </plugin>
 
-                    <argLine>-Xms512m -Xmx1500m</argLine>
 
-                </configuration>
-            </plugin>
+                <plugin>
+                    <groupId>org.sonarsource.scanner.maven</groupId>
+                    <artifactId>sonar-maven-plugin</artifactId>
+                    <version>3.7.0.1746</version>
+                </plugin>
+                <plugin>
+                    <groupId>org.jacoco</groupId>
+                    <artifactId>jacoco-maven-plugin</artifactId>
+                    <version>0.8.6</version>
+                </plugin>
 
-            <!-- Integration Tests -->
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-failsafe-plugin</artifactId>
-                <version>2.19.1</version>
-                <executions>
-                    <execution>
-                        <goals>
-                            <goal>integration-test</goal>
-                        </goals>
-                        <configuration>
-                            <parallel>suites</parallel>
-                            <threadCount>5</threadCount>
-                            <includes>
-                                <include>**/*IntTest.class</include>
-                            </includes>
-                        </configuration>
-                    </execution>
-                </executions>
-            </plugin>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-compiler-plugin</artifactId>
-                <version>3.3</version>
-            </plugin>
-            <plugin>
-                <groupId>org.codehaus.mojo</groupId>
-                <artifactId>findbugs-maven-plugin</artifactId>
-                <version>3.0.3</version>
-            </plugin>
-            <plugin>
-                <groupId>org.codehaus.mojo</groupId>
-                <artifactId>cobertura-maven-plugin</artifactId>
-                <version>2.7</version>
-            </plugin>
-        </plugins>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-site-plugin</artifactId>
+                    <version>3.7.1</version>
+                </plugin>
+
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-project-info-reports-plugin</artifactId>
+                    <version>3.0.0</version>
+                </plugin>
+            </plugins>
     </build>
 
     <reporting>
@@ -145,26 +127,15 @@
                     <plugin>
                         <groupId>org.jacoco</groupId>
                         <artifactId>jacoco-maven-plugin</artifactId>
-                        <configuration>
-                            <destFile>${basedir}/target/coverage-reports/jacoco-unit.exec</destFile>
-                            <dataFile>${basedir}/target/coverage-reports/jacoco-unit.exec</dataFile>
-                            <output>file</output>
-                            <append>true</append>
-                            <excludes>
-                                <exclude>*MethodAccess</exclude>
-                            </excludes>
-                        </configuration>
                         <executions>
                             <execution>
-                                <id>jacoco-initialize</id>
+                                <id>prepare-agent</id>
                                 <goals>
                                     <goal>prepare-agent</goal>
                                 </goals>
-                                <phase>test-compile</phase>
                             </execution>
                             <execution>
-                                <id>jacoco-site</id>
-                                <phase>verify</phase>
+                                <id>report</id>
                                 <goals>
                                     <goal>report</goal>
                                 </goals>
@@ -175,5 +146,4 @@
             </build>
         </profile>
     </profiles>
-
 </project>

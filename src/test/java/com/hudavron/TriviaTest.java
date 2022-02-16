@@ -7,7 +7,7 @@ public class TriviaTest extends TestCase {
 
     public void testCreateRockQuestion() {
         Trivia trivia = new Trivia();
-        Assert.assertEquals(trivia.createRockQuestion(3),"Rock Question 3");
+        Assert.assertEquals("Rock Question 3", trivia.createRockQuestion(3));
     }
 
     public void testPlayerAdd() {
