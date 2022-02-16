@@ -1,3 +1,5 @@
+package com.hudavron;
+
 import junit.framework.TestCase;
 import org.junit.Assert;
 
@@ -5,14 +7,14 @@ public class TriviaTest extends TestCase {
 
     public void testCreateRockQuestion() {
         Trivia trivia = new Trivia();
-        Assert.assertEquals("Rock Question 3", trivia.createRockQuestion(3));
+        Assert.assertEquals(trivia.createRockQuestion(3),"Rock Question 3");
     }
 
     public void testPlayerAdd() {
         Trivia trivia = new Trivia();
         boolean result = trivia.add("");
         Assert.assertTrue(result);
-        Assert.assertEquals(trivia.players.size(), 1);
+        Assert.assertEquals(1, trivia.players.size());
     }
 
     public void testIsntPlayable() {
@@ -34,15 +36,15 @@ public class TriviaTest extends TestCase {
         trivia.add("Marie");
         trivia.add("Dylan");
         trivia.add("Alex");
-        Assert.assertEquals(trivia.howManyPlayers(), 4);
+        Assert.assertEquals(4, trivia.howManyPlayers());
     }
 
-    public void testRoll() {
+   /* public void testRoll() {
     }
 
     public void testWasCorrectlyAnswered() {
     }
 
     public void testWrongAnswer() {
-    }
+    }*/
 }

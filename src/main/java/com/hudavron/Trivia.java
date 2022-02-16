@@ -1,5 +1,8 @@
+package com.hudavron;
+
 import java.util.ArrayList;
 import java.util.LinkedList;
+import java.util.logging.Logger;
 
 public class Trivia {
 
@@ -9,6 +12,7 @@ public class Trivia {
     boolean[] inPenaltyBox  = new boolean[6];
 	private static final String SPORTS = "Sports";
 	private static final String SCIENCE = "Science";
+	private static final Logger LOGGER = Logger.getLogger("Trivia");
     
     LinkedList<String> popQuestions = new LinkedList<>();
     LinkedList<String> scienceQuestions = new LinkedList<>();
@@ -43,8 +47,8 @@ public class Trivia {
 	    purses[howManyPlayers()] = 0;
 	    inPenaltyBox[howManyPlayers()] = false;
 	    
-	    System.out.println(playerName + " was added");
-	    System.out.println("They are player number " + players.size());
+	    LOGGER.info(playerName + " was added");
+	    LOGGER.info("They are player number " + players.size());
 		return true;
 	}
 	
@@ -53,17 +57,17 @@ public class Trivia {
 	}
 
 	public void roll(int roll) {
-		System.out.println(players.get(currentPlayer) + " is the current player");
-		System.out.println("They have rolled a " + roll);
+		LOGGER.info(players.get(currentPlayer) + " is the current player");
+		LOGGER.info("They have rolled a " + roll);
 		
 		if (inPenaltyBox[currentPlayer]) {
 			if (roll % 2 != 0) {
 				isGettingOutOfPenaltyBox = true;
-				
-				System.out.println(players.get(currentPlayer) + " is getting out of the penalty box");
+
+				LOGGER.info(players.get(currentPlayer) + " is getting out of the penalty box");
 				placeRoll(roll);
 			} else {
-				System.out.println(players.get(currentPlayer) + " is not getting out of the penalty box");
+				LOGGER.info(players.get(currentPlayer) + " is not getting out of the penalty box");
 				isGettingOutOfPenaltyBox = false;
 				}
 			
@@ -78,22 +82,22 @@ public class Trivia {
 		places[currentPlayer] = places[currentPlayer] + roll;
 		if (places[currentPlayer] > 11) places[currentPlayer] = places[currentPlayer] - 12;
 
-		System.out.println(players.get(currentPlayer)
+		LOGGER.info(players.get(currentPlayer)
 				+ "'s new location is "
 				+ places[currentPlayer]);
-		System.out.println("The category is " + currentCategory());
+		LOGGER.info("The category is " + currentCategory());
 		askQuestion();
 	}
 
 	private void askQuestion() {
 		if (currentCategory().equals("Pop"))
-			System.out.println(popQuestions.removeFirst());
+			LOGGER.info(popQuestions.removeFirst());
 		if (currentCategory().equals(SCIENCE))
-			System.out.println(scienceQuestions.removeFirst());
+			LOGGER.info(scienceQuestions.removeFirst());
 		if (currentCategory().equals(SPORTS))
-			System.out.println(sportsQuestions.removeFirst());
+			LOGGER.info(sportsQuestions.removeFirst());
 		if (currentCategory().equals("Rock"))
-			System.out.println(rockQuestions.removeFirst());		
+			LOGGER.info(rockQuestions.removeFirst());
 	}
 	
 	
@@ -107,7 +111,7 @@ public class Trivia {
 	public boolean wasCorrectlyAnswered() {
 		if (inPenaltyBox[currentPlayer]){
 			if (isGettingOutOfPenaltyBox) {
-				System.out.println("Answer was correct!!!!");
+				LOGGER.info("Answer was correct!!!!");
 				return pursePlus();
 			} else {
 				currentPlayer++;
@@ -119,14 +123,14 @@ public class Trivia {
 			
 		} else {
 		
-			System.out.println("Answer was corrent!!!!");
+			LOGGER.info("Answer was corrent!!!!");
 			return pursePlus();
 		}
 	}
 
 	private boolean pursePlus() {
 		purses[currentPlayer]++;
-		System.out.println(players.get(currentPlayer)
+		LOGGER.info(players.get(currentPlayer)
 				+ " now has "
 				+ purses[currentPlayer]
 				+ " Gold Coins.");
@@ -139,8 +143,8 @@ public class Trivia {
 	}
 
 	public boolean wrongAnswer(){
-		System.out.println("Question was incorrectly answered");
-		System.out.println(players.get(currentPlayer)+ " was sent to the penalty box");
+		LOGGER.info("Question was incorrectly answered");
+		LOGGER.info(players.get(currentPlayer)+ " was sent to the penalty box");
 		inPenaltyBox[currentPlayer] = true;
 		
 		currentPlayer++;
