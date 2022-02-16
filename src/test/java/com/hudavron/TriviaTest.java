@@ -61,6 +61,23 @@ public class TriviaTest extends TestCase {
         trivia.roll(2);
         Assert.assertFalse(trivia.isGettingOutOfPenaltyBox);
     }
+    public void testCurrentPlayerWrongAnswer() {
+        Trivia trivia = new Trivia();
+        trivia.add("Hugo");
+        trivia.add("Marie");
+        trivia.wrongAnswer();
+        trivia.wrongAnswer();
+        Assert.assertEquals(0 ,trivia.currentPlayer);
+    }
+
+    public void testCurrentPlayerRightAnswer() {
+        Trivia trivia = new Trivia();
+        trivia.add("Hugo");
+        trivia.add("Marie");
+        trivia.wasCorrectlyAnswered();
+        trivia.wasCorrectlyAnswered();
+        Assert.assertEquals(0 ,trivia.currentPlayer);
+    }
 
     public void testWasCorrectlyAnsweredGettingOutOfPenaltyBox0Coins() {
         Trivia trivia = new Trivia();
