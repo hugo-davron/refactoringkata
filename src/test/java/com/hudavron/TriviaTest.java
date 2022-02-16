@@ -93,7 +93,7 @@ public class TriviaTest extends TestCase {
         trivia.add("Marie");
         trivia.wrongAnswer();
         trivia.currentPlayer = 0;
-        trivia.roll(1);
+        trivia.roll(3);
         Assert.assertTrue(trivia.wasCorrectlyAnswered());
     }
 
@@ -152,5 +152,38 @@ public class TriviaTest extends TestCase {
         trivia.add("Hugo");
         trivia.add("Marie");
         Assert.assertTrue(trivia.wrongAnswer());
+    }
+
+    public void testCategory() {
+        Trivia trivia = new Trivia();
+        trivia.add("Hugo");
+        trivia.add("Marie");
+        trivia.roll(0);
+        trivia.wasCorrectlyAnswered();
+        trivia.roll(4);
+        trivia.wasCorrectlyAnswered();
+        trivia.roll(8);
+        trivia.wasCorrectlyAnswered();
+        Assert.assertTrue(true);
+    }
+
+    public void testQuestionGenerationScience(){
+        Trivia trivia = new Trivia();
+        Assert.assertEquals("ScienceQuestion 40", trivia.scienceQuestions.get(40));
+    }
+
+    public void testQuestionGenerationSport(){
+        Trivia trivia = new Trivia();
+        Assert.assertEquals("SportsQuestion 40", trivia.sportsQuestions.get(40));
+    }
+
+    public void testQuestionGenerationPop(){
+        Trivia trivia = new Trivia();
+        Assert.assertEquals("Pop Question 40", trivia.popQuestions.get(40));
+    }
+
+    public void testQuestionGenerationRock(){
+        Trivia trivia = new Trivia();
+        Assert.assertEquals(trivia.createRockQuestion(40), trivia.rockQuestions.get(40));
     }
 }
