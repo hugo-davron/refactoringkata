@@ -129,6 +129,15 @@ public class TriviaTest extends TestCase {
         Assert.assertTrue(trivia.wasCorrectlyAnswered());
     }
 
+    public void testWasCorrectlyGoBackToPlace0() {
+        Trivia trivia = new Trivia();
+        trivia.add("Hugo");
+        trivia.add("Marie");
+        trivia.currentPlayer = 0;
+        trivia.roll(12);
+        Assert.assertEquals(0, trivia.places[0]);
+    }
+
 
     public void testWrongAnswer() {
         Trivia trivia = new Trivia();
